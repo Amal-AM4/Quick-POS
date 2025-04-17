@@ -1,0 +1,122 @@
+<template>
+    <v-app-bar :elevation="2" color="primary" dark>
+        <v-row align="center" class="ml-3" no-gutters>
+            <v-btn icon @click="drawer.toggleDrawer">
+              <v-icon>mdi-menu</v-icon>
+            </v-btn>
+            <v-avatar color="deep-purple accent-4" size="46">
+                <span class="white--text font-weight-bold">AM</span>
+            </v-avatar>
+            <span class="ml-3 text-h6 font-weight-bold white--text">Store Name</span>
+        </v-row>
+
+        <v-spacer />
+
+        <div class="d-flex align-center" style="gap: 12px; margin-right: 16px;">
+        <!-- Settings Menu -->
+            <v-menu offset-y v-model="settingsMenuOpen">
+                <template #activator="{ props }">
+                    <v-btn icon v-bind="props">
+                        <v-icon :class="{ rotate: settingsMenuOpen }">mdi-cog</v-icon>
+                    </v-btn>
+                </template>
+
+                <v-list>
+                    <v-list-item @click="goToProfile">
+                        <v-list-item-title>Update Profile</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="goToSettings">
+                        <v-list-item-title>Settings</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="changeAdministrator">
+                        <v-list-item-title>goToAdministrator</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
+
+            <!-- Sign Out Button -->
+            <v-btn icon @click="signOut">
+                <v-icon>mdi-logout</v-icon>
+            </v-btn>
+
+            <!-- Date & Time -->
+            <div class="d-flex flex-column text-right">
+                <span class="text-subtitle-2 font-weight-bold">{{ currentDate }}</span>
+                <span class="text-caption">{{ currentTime }}</span>
+            </div>
+        </div>
+    </v-app-bar>
+
+    <AsideNav />
+</template>
+
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router'
+import AsideNav from './AsideNav.vue';
+import { useDrawerStore } from '../store/drawerStore';
+
+
+const router = useRouter()
+const drawer = useDrawerStore()
+
+const settingsMenuOpen = ref(false)
+
+const currentTime = ref<string>('')
+const currentDate = ref<string>('')
+
+const updateTime = (): void => {
+    const now: Date = new Date()
+    currentDate.value = now.toLocaleDateString()
+    currentTime.value = now.toLocaleTimeString()
+}
+
+// Navigation to settings page (replace with your routing logic)
+const goToSettings = (): void => {
+  console.log('Navigating to settings...')
+  // e.g., router.push('/settings')
+}
+
+// Sign-out handler (replace with your auth logic)
+const signOut = (): void => {
+  console.log('Signing out...')
+  // e.g., clear tokens, redirect to login page
+  router.push('/')
+}
+
+const goToProfile = () => {
+  router.push('/UpdateProfile')
+}
+
+const changeAdministrator = () => {
+  console.log('change the default username and password...')
+  // Your theme logic here
+}
+
+
+onMounted(() => {
+    updateTime()
+    setInterval(updateTime, 1000) // update every second
+})
+
+</script>
+
+<style scoped lang="scss">
+.v-app-bar {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.rotate {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
