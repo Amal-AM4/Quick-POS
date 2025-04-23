@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"quick-pos/models"
+	"quick-pos/initializers"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -53,6 +54,9 @@ func (a *App) startup(ctx context.Context) {
 	}
 
 	fmt.Println("✅ Database connected and models migrated successfully!")
+
+	// Seed dummy admin if not exists
+	initializers.SeedAdmin(db)
 }
 
 // below you can define your own user defined func

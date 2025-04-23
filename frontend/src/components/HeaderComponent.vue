@@ -29,7 +29,7 @@
                         <v-list-item-title>Settings</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="changeAdministrator">
-                        <v-list-item-title>goToAdministrator</v-list-item-title>
+                        <v-list-item-title>Administrator</v-list-item-title>
                     </v-list-item>
                 </v-list>
             </v-menu>
