@@ -20,7 +20,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/**/*.d.ts" // Include this line to ensure your global types are loaded
   ],
   "references": [
     {

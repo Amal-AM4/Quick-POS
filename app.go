@@ -6,6 +6,7 @@ import (
 	"log"
 	"quick-pos/models"
 	"quick-pos/initializers"
+	"quick-pos/controllers"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -60,3 +61,15 @@ func (a *App) startup(ctx context.Context) {
 }
 
 // below you can define your own user defined func
+// expose to frontend like backend to frontend
+func (a *App) Login(username string, password string) (bool, string) {
+	return controllers.Login(username, password)
+}
+
+func (a *App) Logout()  {
+	controllers.Logout()
+}
+
+func (a *App) IsLoggedIn() bool {
+	return controllers.IsLoggedIn()
+}

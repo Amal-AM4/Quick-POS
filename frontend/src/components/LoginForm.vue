@@ -17,7 +17,7 @@
                 </v-card-title>
 
                 <v-card-text>
-                    <v-form @submit.prevent="handleLogin">
+                    <v-form @submit.prevent="onLogin">
                         <v-text-field
                             v-model="username"
                             label="Username"
@@ -52,29 +52,45 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '../store/auth'
 
 const router = useRouter()
+const auth = useAuthStore()
 
 const username = ref('')
 const password = ref('')
 const isLoading = ref(false)
 
-const handleLogin = () => {
+const onLogin = async () => {
     isLoading.value = true
 
-    setTimeout(() => {
+    console.log('Logging in with:', username.value, password.value);
+    try {
+        await auth.login(username.value, password.value)
+
+        if (auth.loggedIn) {
+            // redirect after login success
+            router.push('/home')
+        } else {
+            // handle failed login attempt
+            console.error("login failed: incorrect credentials");
+        }
+    } catch (error) {
+        console.error('Login error:', error)
+    } finally {
         isLoading.value = false
-        router.push('/dashboard')
-    }, 2000);
+    }
 }
+
+
 </script>
 
 <style scoped lang="scss">
-.login-wrapper {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .login-wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
