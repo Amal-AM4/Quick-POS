@@ -65,7 +65,7 @@ const isLoading = ref(false)
 const onLogin = async () => {
     isLoading.value = true
 
-    console.log('Logging in with:', username.value, password.value);
+    // console.log('Logging in with:', username.value, password.value);
     try {
         await auth.login(username.value, password.value)
 

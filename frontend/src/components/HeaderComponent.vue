@@ -55,10 +55,11 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import AsideNav from './AsideNav.vue';
 import { useDrawerStore } from '../store/drawerStore';
-
+import { useAuthStore } from '../store/auth'
 
 const router = useRouter()
 const drawer = useDrawerStore()
+const auth = useAuthStore()
 
 const settingsMenuOpen = ref(false)
 
@@ -78,10 +79,15 @@ const goToSettings = (): void => {
 }
 
 // Sign-out handler (replace with your auth logic)
-const signOut = (): void => {
+const signOut = async (): Promise<void> => {
   console.log('Signing out...')
-  // e.g., clear tokens, redirect to login page
-  router.push('/')
+  try {
+    await auth.logout()
+    console.log(auth.loggedIn)
+    router.push('/login'); // 🚀 Redirect to login page
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 const goToProfile = () => {

@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async login(username: string, password: string) {
-      console.log('login method called with:', username, password);
+      // console.log('login method called with:', username, password);
     
       try {
         const result = await Login(username, password);
