@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"quick-pos/initializers"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -12,6 +13,9 @@ import (
 var assets embed.FS
 
 func main() {
+	// Initialize DB
+    initializers.ConnectDB()
+
 	// Create an instance of the app structure
 	app := NewApp()
 

@@ -11,7 +11,7 @@ var LoggedIn = false
 // login checks username and password
 func Login(username, password string) (bool, string) {
 	var admin models.Administrator
-	result := initializers.DB.Where("UserName = ?", username).First(&admin)
+	result := initializers.DB.Where("user_name = ?", username).First(&admin)
 
 	if result.Error != nil {
 		return false, "username not found"

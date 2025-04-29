@@ -32,6 +32,7 @@
                             placeholder="••••••••"
                             prepend-inner-icon="mdi-lock"
                             variant="outlined"
+                            type="password"
                         ></v-text-field>
 
                         <v-btn

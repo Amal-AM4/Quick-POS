@@ -11,16 +11,16 @@
 // }
 
 
-declare global {
-interface Window {
-        backend: {
-            App: {
-                Login(username: string, password: string): Promise<[boolean, string]>;
-                Logout(): Promise<void>;
-                IsLoggedIn(): Promise<boolean>;
-            };
-        };
-    }
-}
+// declare global {
+// interface Window {
+//         backend: {
+//             App: {
+//                 Login(username: string, password: string): Promise<[boolean, string]>;
+//                 Logout(): Promise<void>;
+//                 IsLoggedIn(): Promise<boolean>;
+//             };
+//         };
+//     }
+// }
 
-export {};
+// export {};
