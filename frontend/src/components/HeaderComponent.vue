@@ -23,7 +23,7 @@
 
                 <v-list>
                     <v-list-item @click="goToProfile">
-                        <v-list-item-title>Update Profile</v-list-item-title>
+                        <v-list-item-title>Profile</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="goToSettings">
                         <v-list-item-title>Settings</v-list-item-title>

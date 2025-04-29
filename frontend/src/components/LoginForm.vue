@@ -71,7 +71,7 @@ const onLogin = async () => {
 
         if (auth.loggedIn) {
             // redirect after login success
-            router.push('/home')
+            router.push('/dashboard')
         } else {
             // handle failed login attempt
             console.error("login failed: incorrect credentials");

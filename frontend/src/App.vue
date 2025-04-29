@@ -12,9 +12,7 @@ const route = useRoute()
     <HeaderComponent v-if="route.name !== 'login'" /> <!-- Your header -->
     
     <v-main> <!-- Main content area for routed views -->
-      <v-fade-transition>
         <RouterView />
-      </v-fade-transition>
     </v-main>
   </v-app>
 </template>

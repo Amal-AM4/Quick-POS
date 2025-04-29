@@ -3,37 +3,40 @@ import { Login, Logout, IsLoggedIn } from '../../wailsjs/go/main/App'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    loggedIn: false,
-    username: '',
+    loggedIn: localStorage.getItem('loggedIn') === 'true',
+    username: localStorage.getItem('username') || ''
   }),
 
   actions: {
     async login(username: string, password: string) {
-      // console.log('login method called with:', username, password);
-    
       try {
         const result = await Login(username, password);
-    
-        if (typeof result === 'boolean') {
-          if (result) {
-            this.loggedIn = true;
-            this.username = username;
-          } else {
-            alert('Login failed');
-          }
+
+        if (typeof result === 'boolean' && result === true) {
+          this.loggedIn = true;
+          this.username = username;
+          localStorage.setItem('loggedIn', 'true');
+          localStorage.setItem('username', username);
         } else if (typeof result === 'string') {
           alert(result);
         } else {
-          console.error('Unexpected login result:', result);
+          alert('Login failed');
         }
       } catch (error) {
         console.error('Login failed:', error);
+        alert('Login error. Please try again.');
       }
-    },    
+    },
 
     async checkLoggedIn() {
       try {
-        this.loggedIn = await IsLoggedIn();
+        const result = await IsLoggedIn();
+        this.loggedIn = result;
+        if (!result) {
+          this.username = '';
+          localStorage.removeItem('loggedIn');
+          localStorage.removeItem('username');
+        }
       } catch (error) {
         console.error('Check login failed:', error);
       }
@@ -42,11 +45,14 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       try {
         await Logout();
-        this.loggedIn = false;
-        this.username = '';
       } catch (error) {
         console.error('Logout failed:', error);
       }
-    },
+
+      this.loggedIn = false;
+      this.username = '';
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('username');
+    }
   }
 });
