@@ -7,7 +7,11 @@
             <v-avatar color="deep-purple accent-4" size="46">
                 <span class="white--text font-weight-bold">AM</span>
             </v-avatar>
-            <span class="ml-3 text-h6 font-weight-bold white--text">Store Name</span>
+            <!-- Column layout for Store Name and UPI ID -->
+            <div class="ml-3 d-flex flex-column">
+              <span class="text-h6 font-weight-bold white--text">Store Name</span>
+              <span class="text-caption white--text">upi@id</span>
+            </div>
         </v-row>
 
         <v-spacer />
@@ -56,15 +60,17 @@ import { useRouter } from 'vue-router'
 import AsideNav from './AsideNav.vue';
 import { useDrawerStore } from '../store/drawerStore';
 import { useAuthStore } from '../store/auth'
+import { GetStoreData } from '../../wailsjs/go/main/App'
 
 const router = useRouter()
 const drawer = useDrawerStore()
 const auth = useAuthStore()
 
 const settingsMenuOpen = ref(false)
-
 const currentTime = ref<string>('')
 const currentDate = ref<string>('')
+
+const storeDetail = ref<any>(null); // 🏪 Holds your store data
 
 const updateTime = (): void => {
     const now: Date = new Date()
@@ -100,9 +106,17 @@ const changeAdministrator = () => {
 }
 
 
-onMounted(() => {
+onMounted(async () => {
     updateTime()
     setInterval(updateTime, 1000) // update every second
+
+    try {
+      const data = await GetStoreData()
+      storeDetail.value = data;
+      console.log("Fetched store details:", data);
+    } catch (error) {
+      console.error("Error fetching store details:", error);
+    }
 })
 
 </script>

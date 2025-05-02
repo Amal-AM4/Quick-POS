@@ -6,6 +6,10 @@ export function CreateStoreDetail(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8
   return window['go']['main']['App']['CreateStoreDetail'](arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 }
 
+export function GetStoreData() {
+  return window['go']['main']['App']['GetStoreData']();
+}
+
 export function IsLoggedIn() {
   return window['go']['main']['App']['IsLoggedIn']();
 }

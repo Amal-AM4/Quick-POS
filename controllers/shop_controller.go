@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"quick-pos/models"
+	"fmt"
 	"quick-pos/initializers"
+	"quick-pos/models"
 )
 
 func CreateStoreDetail(
@@ -35,6 +36,19 @@ func CreateStoreDetail(
 	if err := initializers.DB.Create(&store).Error; err != nil {
 		return models.StoreDetail{}, err
 	}
+
+	return store, nil
+}
+
+func GetStoreData() (models.StoreDetail, error) {
+	var store models.StoreDetail
+
+	// fetch the first store entry ordered by ID
+	if err := initializers.DB.Order("id ASC").First(&store).Error; err != nil {
+		return models.StoreDetail{}, err
+	}
+
+	fmt.Printf("%v", store)
 
 	return store, nil
 }

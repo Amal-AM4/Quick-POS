@@ -100,3 +100,7 @@ func (a *App) CreateStoreDetail(
 	)
 }
 
+func (a *App) GetStoreData() (models.StoreDetail, error) {
+	return controllers.GetStoreData()
+}
+
