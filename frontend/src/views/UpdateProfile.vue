@@ -14,6 +14,7 @@
             placeholder="Enter store name"
             @input="storeDetails.storeName = capitalizeEachWord(storeDetails.storeName)"
             required
+            :rules="[requiredRule]"
             variant="outlined"
           />
 
@@ -23,6 +24,7 @@
             placeholder="Enter shop owner's name"
             @input="storeDetails.ownerName = capitalizeEachWord(storeDetails.ownerName)"
             required
+            :rules="[requiredRule]"
             variant="outlined"
           />
 
@@ -32,6 +34,7 @@
             placeholder="123 Main St"
             @input="storeDetails.addressLine = capitalizeEachWord(storeDetails.addressLine)"
             required
+            :rules="[requiredRule]"
             variant="outlined"
           />
 
@@ -52,6 +55,7 @@
                 label="Place"
                 placeholder="Current Place"
                 @input="storeDetails.place = capitalizeEachWord(storeDetails.place)"
+                :rules="[requiredRule]"
                 variant="outlined"
               />
             </v-col>
@@ -114,6 +118,7 @@
                 label="UPI ID"
                 placeholder="store@upi"
                 variant="outlined"
+                :rules="[requiredRule]"
               />
             </v-col>
           </v-row>
@@ -127,6 +132,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from "vue-toastification";
+import { CreateStoreDetail } from '../../wailsjs/go/main/App'
+
+const toast = useToast();
+const router = useRouter();
+
+const requiredRule = (value: string) => {
+  return !!value || 'This field is required'
+}
 
 const storeDetails = ref({
   storeName: '',
@@ -167,12 +182,53 @@ const gstinRule = (value: string) => {
   return /^[0-9A-Z]{15}$/.test(value) || 'GSTIN must be 15 characters (A-Z, 0-9)'
 }
 
+
 // Submit handler
 const submitForm = () => {
   formRef.value?.validate().then((valid: boolean) => {
     if (valid) {
-      console.log('Submitted Store Details:', storeDetails.value)
+
+      if (
+        storeDetails.value.storeName !== '' &&
+        storeDetails.value.ownerName !== '' &&
+        storeDetails.value.addressLine !== '' &&
+        storeDetails.value.place !== '' &&
+        storeDetails.value.pincode !== '' &&
+        storeDetails.value.phone !== '' &&
+        storeDetails.value.district !== '' &&
+        storeDetails.value.email !== '' &&
+        storeDetails.value.upiID !== '' &&
+        storeDetails.value.gstin !== ''
+      ) {
+        
+        console.log('Submitted Store Details:', storeDetails.value)
+
+        CreateStoreDetail(
+          storeDetails.value.storeName,
+          storeDetails.value.ownerName,
+          storeDetails.value.addressLine,
+          storeDetails.value.place,
+          storeDetails.value.district,
+          storeDetails.value.pincode,
+          storeDetails.value.phone,
+          storeDetails.value.email,
+          storeDetails.value.gstin,
+          storeDetails.value.upiID
+        )
+        .then((response) => {
+          router.push('/dashboard')
+          toast.success("Store details is successfully added.")
+          console.log('sucessfully insered')
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+      } else {
+        toast.warning("Field should contains values")
+      }
     }
   })
 }
+
+
 </script>

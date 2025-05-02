@@ -73,3 +73,30 @@ func (a *App) Logout()  {
 func (a *App) IsLoggedIn() bool {
 	return controllers.IsLoggedIn()
 }
+
+func (a *App) CreateStoreDetail(
+	storeName string,
+	ownerName string,
+	addressLine string,
+	place string,
+	district string,
+	pincode string,
+	phone string,
+	email string,
+	gstin string,
+	upiID string,
+) (models.StoreDetail, error) {
+	return controllers.CreateStoreDetail(
+		storeName,
+		ownerName,
+		addressLine,
+		place,
+		district,
+		pincode,
+		phone,
+		email,
+		gstin,
+		upiID,
+	)
+}
+

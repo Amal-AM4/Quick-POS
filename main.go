@@ -12,9 +12,14 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
+func init() {
+	// Initialize the database before anything else
+	initializers.ConnectDB()
+}
+
 func main() {
-	// Initialize DB
-    initializers.ConnectDB()
+	// // Initialize DB
+    // initializers.ConnectDB()
 
 	// Create an instance of the app structure
 	app := NewApp()
