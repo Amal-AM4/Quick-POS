@@ -1,5 +1,6 @@
 <template>
-    <v-app-bar :elevation="2" color="primary" dark>
+    <div>
+      <v-app-bar :elevation="2" color="primary" dark>
         <v-row align="center" class="ml-3" no-gutters>
             <v-btn icon @click="drawer.toggleDrawer">
               <v-icon>mdi-menu</v-icon>
@@ -9,7 +10,9 @@
             </v-avatar>
             <!-- Column layout for Store Name and UPI ID -->
             <div class="ml-3 d-flex flex-column">
-              <span class="text-h6 font-weight-bold white--text">Store Name</span>
+              <span class="text-h6 font-weight-bold white--text">
+                {{ storeDetail?.StoreName || "store name" }}
+              </span>
               <span class="text-caption white--text">upi@id</span>
             </div>
         </v-row>
@@ -49,9 +52,10 @@
                 <span class="text-caption">{{ currentTime }}</span>
             </div>
         </div>
-    </v-app-bar>
+      </v-app-bar>
 
-    <AsideNav />
+      <AsideNav />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -60,11 +64,12 @@ import { useRouter } from 'vue-router'
 import AsideNav from './AsideNav.vue';
 import { useDrawerStore } from '../store/drawerStore';
 import { useAuthStore } from '../store/auth'
-import { GetStoreData } from '../../wailsjs/go/main/App'
+import { useStoreData } from '../store/storeData'
 
 const router = useRouter()
 const drawer = useDrawerStore()
 const auth = useAuthStore()
+const store = useStoreData()
 
 const settingsMenuOpen = ref(false)
 const currentTime = ref<string>('')
@@ -110,13 +115,9 @@ onMounted(async () => {
     updateTime()
     setInterval(updateTime, 1000) // update every second
 
-    try {
-      const data = await GetStoreData()
-      storeDetail.value = data;
-      console.log("Fetched store details:", data);
-    } catch (error) {
-      console.error("Error fetching store details:", error);
-    }
+    await store.fetchStoreDetails()
+    storeDetail.value = store.storeDetail
+    console.log("✅ After fetch:", storeDetail.value)
 })
 
 </script>
