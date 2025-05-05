@@ -6,14 +6,16 @@
               <v-icon>mdi-menu</v-icon>
             </v-btn>
             <v-avatar color="deep-purple accent-4" size="46">
-                <span class="white--text font-weight-bold">AM</span>
+                <span class="white--text font-weight-bold">
+                  {{ storeDetail?.StoreName?.charAt(0) || "F" }}
+                </span>
             </v-avatar>
             <!-- Column layout for Store Name and UPI ID -->
             <div class="ml-3 d-flex flex-column">
               <span class="text-h6 font-weight-bold white--text">
                 {{ storeDetail?.StoreName || "store name" }}
               </span>
-              <span class="text-caption white--text">upi@id</span>
+              <span class="text-caption white--text">{{ 'UPI: ' + storeDetail?.UpiID || "store name" }}</span>
             </div>
         </v-row>
 
