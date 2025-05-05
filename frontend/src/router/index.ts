@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import UpdateProfile from '../views/UpdateProfile.vue'
+import SupplierPage from '../views/SuppliersPage.vue'
+import ProductPage from '../views/ProductPage.vue'
 import { useAuthStore } from '../store/auth'
 
 const router = createRouter({
@@ -21,6 +23,16 @@ const router = createRouter({
             path: '/UpdateProfile',
             name: 'updateProfile',
             component: UpdateProfile,
+        },
+        {
+            path: '/product',
+            name: 'Product',
+            component: ProductPage
+        },
+        {
+            path: '/suppliers',
+            name: 'Suppliers',
+            component: SupplierPage
         },
     ],
 })

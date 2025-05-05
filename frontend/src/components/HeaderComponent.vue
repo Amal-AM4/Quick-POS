@@ -119,7 +119,7 @@ onMounted(async () => {
 
     await store.fetchStoreDetails()
     storeDetail.value = store.storeDetail
-    console.log("✅ After fetch:", storeDetail.value)
+    // console.log("✅ After fetch:", storeDetail.value)
 })
 
 </script>

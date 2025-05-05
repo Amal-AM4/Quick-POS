@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	// "fmt"
 	"quick-pos/initializers"
 	"quick-pos/models"
 )
@@ -48,7 +48,7 @@ func GetStoreData() (models.StoreDetail, error) {
 		return models.StoreDetail{}, err
 	}
 
-	fmt.Printf("%v", store)
+	// fmt.Printf("%v", store)
 
 	return store, nil
 }

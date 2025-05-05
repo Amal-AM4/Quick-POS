@@ -26,7 +26,7 @@ export const useStoreData = defineStore('store', {
     async fetchStoreDetails() {
       try {
         const data: StoreDetail = await GetStoreData()
-        console.log("✅ Store Data from Go:", data)
+        // console.log("✅ Store Data from Go:", data)
         this.storeDetail = data
       } catch (error) {
         console.error("❌ Error fetching store details:", error)

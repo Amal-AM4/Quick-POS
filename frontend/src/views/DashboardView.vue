@@ -94,7 +94,7 @@ import LineChart from '../components/LineChart.vue';
 
 
 const buttons = [
-    { label: 'New Bill', icon: 'mdi-file-document', color: 'blue-darken-2', route: '/bill' },
+    { label: 'Sales Terminal', icon: 'mdi-file-document', color: 'blue-darken-2', route: '/bill' },
     { label: 'Add Product', icon: 'mdi-plus-box', color: 'green-darken-2', route: '/product' },
     { label: 'Suppliers', icon: 'mdi-truck', color: 'indigo-darken-2', route: '/suppliers' },
     { label: 'Customers', icon: 'mdi-account-group', color: 'deep-orange-darken-2', route: '/customers' },
