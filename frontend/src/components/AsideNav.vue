@@ -9,9 +9,9 @@
     >
         <v-list nav>
             <v-list-item title="Dashboard" @click="navigate('/dashboard')" />
-            <v-list-item title="New Bill" @click="navigate('/')" />
-            <v-list-item title="Add Product" @click="navigate('/')" />
-            <v-list-item title="Suppliers" @click="navigate('/')" />
+            <v-list-item title="Sales Terminal" @click="navigate('/')" />
+            <v-list-item title="Add Product" @click="navigate('/product')" />
+            <v-list-item title="Suppliers" @click="navigate('/suppliers')" />
             <v-list-item title="Customers" @click="navigate('/')" />
             <v-list-item title="Reports" @click="navigate('/')" />
             <v-list-item title="Purchase" @click="navigate('/')" />

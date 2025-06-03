@@ -1,19 +1,46 @@
-# README
+# 💼 Quick-POS
 
-## About
+Quick-POS is a fast and modern desktop Point-of-Sale (POS) application built using [Wails](https://wails.io), leveraging the power of Go for backend logic and Vue 3 with Vuetify for a rich, responsive frontend. This application is designed for small to medium-sized businesses to manage their sales operations efficiently.
 
-This is the official Wails Vue-TS template.
+---
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+## 🚀 Tech Stack
 
-## Live Development
+- ⚙️ **Golang** - Backend logic and business rules
+- 🖼️ **Vue 3** - Modern reactive frontend
+- 🎨 **Vuetify** - Material design component framework
+- 🧠 **TypeScript** - Type-safe frontend development
+- 💾 **SQLite** - Lightweight embedded database
+- 🖥️ **Wails** - For building cross-platform desktop apps with Go + frontend
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+---
 
-## Building
+## ✨ Features
 
-To build a redistributable, production mode package, use `wails build`.
+- 🔐 **Authentication System** - Secure login for authorized users
+- 🏪 **Store Profile Management** - Easily manage store information and settings
+- 📊 **Informative Dashboard** - Visual representation of key metrics like sales, revenue, etc.
+- 📁 **Local SQLite Storage** - Lightweight and easy-to-manage database
+- ⚡ **Fast UI with Vite** - Instant reload and smooth dev experience
+
+---
+
+## 📷 Screenshots
+
+### 🔑 Login Page
+![Login Page](./screenshot/login.png)
+
+### 📚 Sidebar Navigation
+![Sidebar](./screenshot/aside.png)
+
+### 📊 Dashboard Overview
+![Dashboard](./screenshot/dashboard.png)
+
+---
+
+## 🧪 Live Development
+
+To start the development server:
+
+```bash
+wails dev
